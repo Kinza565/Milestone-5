@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shareable Resume Builder</title>
+  <style>
+    /* Basic Reset */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    /* Header */
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+    /* Form Styling */
+    form {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label, input, textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input, textarea {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    /* Resume Output Styling */
+    #resumeOutput {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    /* Shareable Link Section */
+    #shareableLinkContainer {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Shareable Resume By Kinza Khan</h1>
+
+  <!-- Resume Form -->
+  <form id="resumeForm">
+    <fieldset>
+      <legend>Personal Information</legend>
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" required>
+    </fieldset>
+
+    <fieldset>
+      <legend>Education</legend>
+      <label for="education">Education</label>
+      <textarea id="education" name="education" rows="3" required></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Experience</legend>
+      <label for="experience">Experience</label>
+      <textarea id="experience" name="experience" rows="3" required></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Skills</legend>
+      <label for="skills">Skills</label>
+      <textarea id="skills" name="skills" rows="3" required></textarea>
+    </fieldset>
+
+    <button type="submit">Generate Resume</button>
+  </form>
+
+  <!-- Resume Display Section -->
+  <div id="resumeOutput">
+    <!-- The dynamically generated resume will appear here -->
+  </div>
+
+  <!-- Shareable Link and Download Section -->
+  <div id="shareableLinkContainer">
+    <h2>Shareable Link</h2>
+    <p>Here is your unique link to view or edit your resume:</p>
+    <a href="#" id="shareableLink" target="_blank">Resume Link</a>
+    <br><br>
+    <button id="downloadPdf"><b>Download as PDF</b></button>
+  </div>
+
+  <!-- JavaScript to Handle Resume Generation and Display -->
+  <script>
+    document.getElementById("resumeForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Fetching input values
+      const name = document.getElementById("fullName").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phoneNumber").value;
+      const education = document.getElementById("education").value;
+      const experience = document.getElementById("experience").value;
+      const skills = document.getElementById("skills").value;
+
+      // Generate resume HTML structure
+      const resumeOutput = `
+        <h2>Resume</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Phone:</b> ${phone}</p>
+        <h3>Education</h3>
+        <p>${education}</p>
+        <h3>Experience</h3>
+        <p>${experience}</p>
+        <h3>Skills</h3>
+        <p>${skills}</p>
+      `;
+
+      // Display the generated resume
+      document.getElementById("resumeOutput").innerHTML = resumeOutput;
+
+      // Show shareable link and download options
+      document.getElementById("shareableLinkContainer").style.display = "block";
+
+      // Generate a dummy shareable link
+      document.getElementById("shareableLink").href = "#";
+      document.getElementById("shareableLink").textContent = "https://your-resume-link.com/" + encodeURIComponent(name);
+    });
+
+    // Placeholder for download functionality
+    document.getElementById("downloadPdf").addEventListener("click", function() {
+      alert("Download as PDF functionality will be implemented here.");
+    });
+  </script>
+</body>
+</html>
